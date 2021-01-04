@@ -148,7 +148,8 @@ void fillDisplay(int numOfDigit)
     }
 }
 
-void clean(){
+void clean()
+{
 
     for(int i=0; i<6; i++)
     {
@@ -174,19 +175,28 @@ void timerDisplay(int minutes,int seconds)
     {
         if(time[i]==':')
         {
-            addDots(i*10+1);
+            addDots(i*10+i-1);
         }
         fillDisplay(i);
         i++;
     }
 
+    int displaySize=0;
+    if(i==5)
+    {
+        displaySize=46;
+    }
+    if(i==6)
+    {
+        displaySize=57;
+    }
     for(int i=0; i<11; i++)
     {
-        for(int j=0; j<57; j++)
+        for(int j=0; j<displaySize; j++)
         {
             if(display[i][j]=='*')
             {
-               cout<<" ";
+                cout<<" ";
             }
             else
             {

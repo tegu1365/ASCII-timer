@@ -55,19 +55,19 @@ void timer()
 {
     int min_=minutes;
     int sec=seconds;
-    for(; min_>=0; min_--)
+
+    for(; sec>=0; sec--)
     {
-        for(; sec>=0; sec--)
+        sleep(1);
+        system("CLS");
+        timerDisplay(min_,sec);
+        //cout<<min_<<":"<<sec<<endl;
+        if(sec==0&&min_!=0)
         {
-            sleep(1);
-            system("CLS");
-            timerDisplay(min_,sec);
-            // cout<<min_<<":"<<sec<<endl;
-            if(sec==0)
-            {
-                sec=60;
-            }
+            sec=60;
+            min_--;
         }
+
 
     }
 }
@@ -78,6 +78,6 @@ int main()
     input();
     system("CLS");
     timer();
-    //timerDisplay(minutes,seconds);
+
     return 0;
 }
