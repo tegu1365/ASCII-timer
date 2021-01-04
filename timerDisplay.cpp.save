@@ -54,5 +54,5 @@ char digitsCodes[][]=
 void timerDisplay(int minutes,int seconds)
 {
     //cout<<minutes<<":"<<seconds<<endl;
-
+    
 }
