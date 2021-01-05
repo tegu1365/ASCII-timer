@@ -25,6 +25,8 @@ legend:
 char time[6];
 char display[11][57];
 bool inSec=false;
+int rightPad=0;
+int bottom=0;
 char digitsCodes[][121]=
 {
     //0
@@ -111,6 +113,20 @@ void addDots(int col)
     inSec=true;
 }
 
+void center(int dispW)
+{
+    int consW=80, consH=25;
+    int dispH=11;
+    int top=0;
+    top=(consH-dispH)/2;
+    rightPad=(consW-dispW)/2;
+    bottom=top;
+    for(int i=0; i<top; i++)
+    {
+        cout<<endl;
+    }
+}
+
 void fillDisplay(int numOfDigit)
 {
     int currentDigit=time[numOfDigit]-'0';
@@ -190,8 +206,13 @@ void timerDisplay(int minutes,int seconds)
     {
         displaySize=57;
     }
+    center(displaySize);
     for(int i=0; i<11; i++)
     {
+        for(int r=0; r<rightPad; r++)
+        {
+            cout<<" ";
+        }
         for(int j=0; j<displaySize; j++)
         {
             if(display[i][j]=='*')
@@ -203,6 +224,14 @@ void timerDisplay(int minutes,int seconds)
                 cout<<display[i][j];
             }
         }
+        for(int r=0; r<rightPad; r++)
+        {
+            cout<<" ";
+        }
+        cout<<endl;
+    }
+    for(int b=0; b<bottom; b++)
+    {
         cout<<endl;
     }
 }
