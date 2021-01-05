@@ -22,6 +22,23 @@ using namespace std;
 int minutes=0;
 int seconds=0;
 
+bool verify(int a);
+void input();
+void timer();
+void resetOrExit();
+void beep();
+
+int main()
+{
+
+    input();
+    system("CLS");
+    timer();
+    beep();
+    resetOrExit();
+    return 0;
+}
+
 bool verify(int a)
 {
     if(a>9999)
@@ -68,16 +85,38 @@ void timer()
             min_--;
         }
 
-
     }
 }
 
-int main()
+void resetOrExit()
 {
+    char ans;
+    cout<<"Do you want to reset? Y/N: ";
+    cin>>ans;
+    if(ans=='y' || ans=='Y')
+    {
+        system("CLS");
+        main();
+    }
+    else
+    {
+        if(ans=='n' || ans=='N')
+        {
+          system("EXIT");
 
-    input();
-    system("CLS");
-    timer();
+        }
+        else
+        {
+            system("CLS");
+            cout<<"The answer must be under Y or N.";
+            resetOrExit();
+        }
+    }
 
-    return 0;
 }
+
+
+void beep() {
+  cout << "\a";
+}
+
