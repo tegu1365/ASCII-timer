@@ -22,15 +22,15 @@ using namespace std;
 int minutes=0;
 int seconds=0;
 
-bool verify(int a);
-void input();
-void timer();
-void resetOrExit();
-void beep();
+bool verify(int a);//function for verifying the input
+void input();//function for the input
+void timer();//countdown function
+void resetOrExit();//function to reset the timer with new number of seconds
+void beep();//sound function
 
 int main()
 {
-
+    cout<<"Input the number of seconds (0;10000): ";
     input();
     system("CLS");
     timer();
@@ -41,7 +41,7 @@ int main()
 
 bool verify(int a)
 {
-    if(a>9999)
+    if(a>9999||a<0)
     {
         return false;
     }
@@ -63,12 +63,12 @@ void input()
     else
     {
         system("CLS");
-        cout<<"The number must be under 5 digits. Please try again: ";
+        cout<<"The number must be under 5 digits and positive. Please try again: ";
         input();
     }
 }
 
-void timer()
+void timer()//calls up the function to generate the timer's display every second
 {
     int min_=minutes;
     int sec=seconds;
@@ -78,7 +78,6 @@ void timer()
         sleep(1);
         system("CLS");
         timerDisplay(min_,sec);
-        //cout<<min_<<":"<<sec<<endl;
         if(sec==0&&min_!=0)
         {
             sec=60;
@@ -108,7 +107,7 @@ void resetOrExit()
         else
         {
             system("CLS");
-            cout<<"The answer must be under Y or N.";
+            cout<<"The answer must be Y/y or N/n.";
             resetOrExit();
         }
     }

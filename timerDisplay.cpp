@@ -15,19 +15,12 @@
 #include<iostream>
 using namespace std;
 
-//col=10
-//row=11
-/*
-legend:
-*=\0
--=\n
-*/
-char time[6];
-char display[11][57];
-bool inSec=false;
-int rightPad=0;
-int bottom=0;
-char digitsCodes[][121]=
+char time[6];//this array is for the time display with charactes
+char display[11][57];//display for the numbers
+bool inSec=false;//this variable is to see if we are working with the seconds or the minutes
+int rightPad=0;//this variable is for the right and left padding
+int bottom=0;//this variable is for the bottom padding
+char digitsCodes[][121]=//every number has a code for the ASCII art '-' is a new line and '*' is a space
 {
     //0
     "0000000000-0********0-0********0-0********0-0********0-0********0-0********0-0********0-0********0-0********0-0000000000",
@@ -50,12 +43,12 @@ char digitsCodes[][121]=
     //9
     "9999999999-9********9-9********9-9********9-9********9-9999999999-*********9-*********9-*********9-*********9-9999999999",
 //    //dots(10)
-//    "*-*-*-▓-*-*-▓-*-*-*-*",
+//    "*-*-*-@-*-*-@-*-*-*-*",
 //    //space(11)
 //    "*-*-*-*-*-*-*-*-*-*-*"
 };
 
-void timeToChar(int min_,int sec)
+void timeToChar(int min_,int sec)//this function converts the given minutes and seconds to a valid format "mm:ss"
 {
     int i=0;
     if(min_<10)
@@ -94,7 +87,7 @@ void timeToChar(int min_,int sec)
     }
 }
 
-void addSpace(int col)
+void addSpace(int col)// function for adding space between digits on the display
 {
     for(int i=0; i<11; i++)
     {
@@ -102,7 +95,7 @@ void addSpace(int col)
     }
 }
 
-void addDots(int col)
+void addDots(int col)// function for adding dots between the seconds and the minutes on the display
 {
     char dots[]= "***@**@****";
     addSpace(col);
@@ -113,7 +106,7 @@ void addDots(int col)
     inSec=true;
 }
 
-void center(int dispW)
+void center(int dispW)//function for finding the paddings and drawing the top padding
 {
     int consW=80, consH=25;
     int dispH=11;
@@ -127,7 +120,7 @@ void center(int dispW)
     }
 }
 
-void fillDisplay(int numOfDigit)
+void fillDisplay(int numOfDigit)//function that adds every single digit in the display array
 {
     int currentDigit=time[numOfDigit]-'0';
     char currentDigitCode[121];
@@ -164,7 +157,7 @@ void fillDisplay(int numOfDigit)
     }
 }
 
-void clean()
+void clean()//function to reset the data in the arrays: time and display
 {
 
     for(int i=0; i<6; i++)
@@ -181,12 +174,14 @@ void clean()
     }
 }
 
-void timerDisplay(int minutes,int seconds)
+void timerDisplay(int minutes,int seconds)// function that draws the display with the help of the other functions in the file
 {
-    inSec=false;
+    int displaySize=0;
+    inSec=false;//we are starting to work with the minutes
     clean();
     timeToChar(minutes,seconds);
     int i=0;
+    //starts with filling the digits in the display array
     while(time[i]!='\0')
     {
         if(time[i]==':')
@@ -197,7 +192,7 @@ void timerDisplay(int minutes,int seconds)
         i++;
     }
 
-    int displaySize=0;
+    //depending on the number of digits the size of display is different
     if(i==5)
     {
         displaySize=46;
@@ -206,6 +201,7 @@ void timerDisplay(int minutes,int seconds)
     {
         displaySize=57;
     }
+    //drawing the timer's display with the paddings
     center(displaySize);
     for(int i=0; i<11; i++)
     {
