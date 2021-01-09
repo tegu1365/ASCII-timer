@@ -101,13 +101,13 @@ void resetOrExit()
     {
         if(ans=='n' || ans=='N')
         {
-          system("EXIT");
+            system("EXIT");
 
         }
         else
         {
             system("CLS");
-            cout<<"The answer must be Y/y or N/n.";
+            cout<<"The answer must be Y/y or N/n. ";
             resetOrExit();
         }
     }
@@ -115,7 +115,8 @@ void resetOrExit()
 }
 
 
-void beep() {
-  cout << "\a";
+void beep()
+{
+    cout << "\a";
 }
 
