@@ -15,7 +15,7 @@
 #include<iostream>
 using namespace std;
 
-char time 6]; //this array is for the time display with charactes
+char time [6]; //this array is for the time display with charactes
 char display[11][57]; //display for the numbers
 bool inSec=false; //this variable is to see if we are working with the seconds or the minutes
 int rightPad=0; //this variable is for the right and left padding
