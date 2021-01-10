@@ -15,12 +15,12 @@
 #include<iostream>
 using namespace std;
 
-char time[6];//this array is for the time display with charactes
-char display[11][57];//display for the numbers
-bool inSec=false;//this variable is to see if we are working with the seconds or the minutes
-int rightPad=0;//this variable is for the right and left padding
-int bottom=0;//this variable is for the bottom padding
-char digitsCodes[][121]=//every number has a code for the ASCII art '-' is a new line and '*' is a space
+char time 6]; //this array is for the time display with charactes
+char display[11][57]; //display for the numbers
+bool inSec=false; //this variable is to see if we are working with the seconds or the minutes
+int rightPad=0; //this variable is for the right and left padding
+int bottom=0; //this variable is for the bottom padding
+char digitsCodes[][121]= //every number has a code for the ASCII art '-' is a new line and '*' is a space
 {
     //0
     "0000000000-0********0-0********0-0********0-0********0-0********0-0********0-0********0-0********0-0********0-0000000000",
@@ -48,170 +48,170 @@ char digitsCodes[][121]=//every number has a code for the ASCII art '-' is a new
 //    "*-*-*-*-*-*-*-*-*-*-*"
 };
 
-void timeToChar(int min_,int sec)//this function converts the given minutes and seconds to a valid format "mm:ss"
+void timeToChar (int min_, int sec)//this function converts the given minutes and seconds to a valid format "mm:ss"
 {
-    int i=0;
-    if(min_<10)
+    int i= 0;
+    if (min_ < 10)
     {
-        time[0]='0';
-        time[1]='0'+min_;
+        time[0]= '0';
+        time[1]= '0' + min_;
         i=2;
     }
     else
     {
-        if(min_>9 && min_<100)
+        if (min_ > 9 && min_ <  100)
         {
-            time[0]='0'+min_/10;
-            time[1]='0'+min_%10;
-            i=2;
+            time[0]= '0' + min_/10;
+            time[1]= '0' + min_%10;
+            i= 2;
         }
         else
         {
-            time[0]='0'+min_/100;
-            int a=min_%100;
-            time[1]='0'+a/10;
-            time[2]='0'+a%10;
-            i=3;
+            time[0]= '0' + min_/100;
+            int a= min_%100;
+            time[1]= '0' + a/10;
+            time[2]= '0' + a%10;
+            i= 3;
         }
     }
-    time[i]=':';
-    if(sec<10)
+    time[i]= ':';
+    if (sec < 10)
     {
-        time[i+1]='0';
-        time[i+2]='0'+sec;
+        time[i+1]= '0';
+        time[i+2]= '0' + sec;
     }
     else
     {
-        time[i+1]='0'+sec/10;
-        time[i+2]='0'+sec%10;
+        time[i+1]= '0' + sec/10;
+        time[i+2]= '0' + sec%10;
     }
 }
 
-void addSpace(int col)// function for adding space between digits on the display
+void addSpace (int col)// function for adding space between digits on the display
 {
-    for(int i=0; i<11; i++)
+    for (int i = 0; i < 11; i++)
     {
-        display[i][col]='*';
+        display[i][col]= '*';
     }
 }
 
-void addDots(int col)// function for adding dots between the seconds and the minutes on the display
+void addDots (int col)// function for adding dots between the seconds and the minutes on the display
 {
     char dots[]= "***@**@****";
-    addSpace(col);
-    for(int i=0; i<11; i++)
+    addSpace (col);
+    for (int i = 0; i < 11; i++)
     {
-        display[i][col+1]=dots[i];
+        display[i][col+1]= dots[i];
     }
-    inSec=true;
+    inSec= true;
 }
 
-void center(int dispW)//function for finding the paddings and drawing the top padding
+void center (int dispW)//function for finding the paddings and drawing the top padding
 {
-    int consW=80, consH=25;
-    int dispH=11;
-    int top=0;
-    top=(consH-dispH)/2;
-    rightPad=(consW-dispW)/2;
-    bottom=top;
-    for(int i=0; i<top; i++)
+    int consW= 80, consH= 25;
+    int dispH= 11;
+    int top= 0;
+    top= (consH - dispH)/2;
+    rightPad= (consW - dispW)/2;
+    bottom= top;
+    for (int i = 0; i < top; i++)
     {
         cout<<endl;
     }
 }
 
-void fillDisplay(int numOfDigit)//function that adds every single digit in the display array
+void fillDisplay (int numOfDigit)//function that adds every single digit in the display array
 {
-    int currentDigit=time[numOfDigit]-'0';
+    int currentDigit= time[numOfDigit] - '0';
     char currentDigitCode[121];
-    int size_=0;
-    int row=0,col=0,offset=0;
+    int size_= 0;
+    int row= 0, col= 0, offset=0;
 
-    for(int i=0; digitsCodes[currentDigit][i]!='\0'; i++)
+    for (int i = 0; digitsCodes[currentDigit][i] != '\0'; i++)
     {
-        currentDigitCode[i]=digitsCodes[currentDigit][i];
+        currentDigitCode[i]= digitsCodes[currentDigit][i];
         size_++;
     }
-    currentDigitCode[size_+1]='\0';
-    if(inSec)
+    currentDigitCode[size_+1]= '\0';
+    if (inSec)
     {
-        offset=(numOfDigit-1)*11+2;
+        offset= (numOfDigit - 1)*11 + 2;
     }
     else
     {
-        offset=numOfDigit*11;
+        offset= numOfDigit*11;
     }
 
-    for(int i=0; i<size_; i++)
+    for (int i = 0; i < size_; i++)
     {
-        if(currentDigitCode[i]!='-')
+        if (currentDigitCode[i] != '-')
         {
-            display[row][col+offset]=currentDigitCode[i];
+            display[row][col+offset]= currentDigitCode[i];
             col++;
         }
         else
         {
             row++;
-            col=0;
+            col= 0;
         }
     }
 }
 
-void clean()//function to reset the data in the arrays: time and display
+void clean ()//function to reset the data in the arrays: time and display
 {
 
-    for(int i=0; i<6; i++)
+    for (int i = 0; i < 6; i++)
     {
         time[i] = '\0';
     }
-    for(int i=0; i<11; i++)
+    for (int i = 0; i < 11; i++)
     {
-        for(int j=0; j<57; j++)
+        for (int j = 0; j < 57; j++)
         {
-            display[i][j]=0;
+            display[i][j]= 0;
 
         }
     }
 }
 
-void timerDisplay(int minutes,int seconds)// function that draws the display with the help of the other functions in the file
+void timerDisplay (int minutes, int seconds)// function that draws the display with the help of the other functions in the file
 {
-    int displaySize=0;
-    inSec=false;//we are starting to work with the minutes
-    clean();
-    timeToChar(minutes,seconds);
-    int i=0;
+    int displaySize= 0;
+    inSec= false;//we are starting to work with the minutes
+    clean ();
+    timeToChar (minutes, seconds);
+    int i= 0;
     //starts with filling the digits in the display array
-    while(time[i]!='\0')
+    while (time[i] != '\0')
     {
-        if(time[i]==':')
+        if (time[i] == ':')
         {
-            addDots(i*10+i-1);
+            addDots (i*10 + i - 1);
         }
-        fillDisplay(i);
+        fillDisplay (i);
         i++;
     }
 
     //depending on the number of digits the size of display is different
-    if(i==5)
+    if (i == 5)
     {
-        displaySize=46;
+        displaySize= 46;
     }
-    if(i==6)
+    if(i == 6)
     {
-        displaySize=57;
+        displaySize= 57;
     }
     //drawing the timer's display with the paddings
-    center(displaySize);
-    for(int i=0; i<11; i++)
+    center (displaySize);
+    for (int i = 0; i < 11; i++)
     {
-        for(int r=0; r<rightPad; r++)
+        for (int r = 0; r < rightPad; r++)
         {
             cout<<" ";
         }
-        for(int j=0; j<displaySize; j++)
+        for (int j = 0; j < displaySize; j++)
         {
-            if(display[i][j]=='*')
+            if (display[i][j] == '*')
             {
                 cout<<" ";
             }
@@ -220,13 +220,13 @@ void timerDisplay(int minutes,int seconds)// function that draws the display wit
                 cout<<display[i][j];
             }
         }
-        for(int r=0; r<rightPad; r++)
+        for (int r = 0; r < rightPad; r++)
         {
             cout<<" ";
         }
-        cout<<endl;
+        cout<< endl;
     }
-    for(int b=0; b<bottom; b++)
+    for (int b = 0; b < bottom; b++)
     {
         cout<<endl;
     }

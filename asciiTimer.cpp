@@ -19,29 +19,29 @@
 #include "timerDisplay.cpp"
 using namespace std;
 
-int minutes=0;
-int seconds=0;
+int minutes= 0;
+int seconds= 0;
 
-bool verify(int a);//function for verifying the input
-void input();//function for the input
-void timer();//countdown function
-void resetOrExit();//function to reset the timer with new number of seconds
-void beep();//sound function
+bool verify (int a);//function for verifying the input
+void input ();//function for the input
+void timer ();//countdown function
+void resetOrExit ();//function to reset the timer with new number of seconds
+void beep ();//sound function
 
 int main()
 {
     cout<<"Input the number of seconds (0;10000): ";
-    input();
+    input ();
     system("CLS");
-    timer();
-    beep();
-    resetOrExit();
+    timer ();
+    beep ();
+    resetOrExit ();
     return 0;
 }
 
-bool verify(int a)
+bool verify (int a)
 {
-    if(a>9999||a<0)
+    if (a > 9999 || a < 0)
     {
         return false;
     }
@@ -51,64 +51,63 @@ bool verify(int a)
     }
 }
 
-void input()
+void input ()
 {
-    int in=0;
-    cin>>in;
-    if(verify(in))
+    int in = 0;
+    cin>> in;
+    if (verify (in))
     {
-        minutes=in/60;
-        seconds=in%60;
+        minutes = in/60;
+        seconds = in%60;
     }
     else
     {
-        system("CLS");
+        system ("CLS");
         cout<<"The number must be under 5 digits and positive. Please try again: ";
-        input();
+        input ();
     }
 }
 
-void timer()//calls up the function to generate the timer's display every second
+void timer ()//calls up the function to generate the timer's display every second
 {
-    int min_=minutes;
-    int sec=seconds;
+    int min_= minutes;
+    int sec= seconds;
 
-    for(; sec>=0; sec--)
+    for(; sec >= 0; sec--)
     {
-        sleep(1);
-        system("CLS");
-        timerDisplay(min_,sec);
-        if(sec==0&&min_!=0)
+        sleep (1);
+        system ("CLS");
+        timerDisplay (min_, sec);
+        if (sec == 0 && min_ != 0)
         {
-            sec=60;
+            sec= 60;
             min_--;
         }
 
     }
 }
 
-void resetOrExit()
+void resetOrExit ()
 {
     char ans;
     cout<<"Do you want to reset? Y/N: ";
     cin>>ans;
-    if(ans=='y' || ans=='Y')
+    if (ans == 'y' || ans == 'Y')
     {
-        system("CLS");
-        main();
+        system ("CLS");
+        main ();
     }
     else
     {
-        if(ans=='n' || ans=='N')
+        if (ans == 'n' || ans == 'N')
         {
             system("EXIT");
-
         }
         else
         {
-            system("CLS");
+            system ("CLS");
             cout<<"The answer must be Y/y or N/n. ";
-            resetOrExit();
+            resetOrExit ();
         }
     }
 
